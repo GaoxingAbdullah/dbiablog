@@ -1,37 +1,41 @@
+{% extends 'core/base.html' %} {% block content %}
 
-{% extends 'core/base.html' %}
+<section class="hero">
+  <div class="container has-text-centered">
+    <h2 class="title">What We Do</h2>
+    <br />
+    <p class="subtitle">
+      We're on a mission to help your find and secured your dream university
+      admission
+    </p>
+  </div>
 
-{% block content %}
+  <div class="hero-body">
+    <div class="container">
+      <section class="section">
+        <div class="columns">
+          <div class="column is-multiline is-4 is-offset-2">
+            {% for post in posts %}
+            <div class="content is-medium">
+              <a href=" {% url 'post_detail' post.category.slug post.slug  %} ">
+                {% if post.image %}
+                <figure class="image mb-6">
+                  <img src="{{ post.image.url }}" />
+                </figure>
+                {% endif %}
 
-<section class="hero ">
-    <div class="hero-body">
-        <div class="container">
-            <section class="section">
-                 <div class="columns">
-                    <div class="column is-8 is-offset-2">
-                        {% for post in posts  %}
-                        <div class="content is-medium">
-                            <a href=" {% url 'post_detail' post.category.slug post.slug  %} " >
+                <h2 class="subtitle is-4">{{ post.created_at }}</h2>
+                <h1 class="title">{{ post.title }}</h1>
+                <p>{{ post.intro }}</p>
+              </a>
+            </div>
 
-                            {% if post.image %}
-                                <figure class="image mb-6">
-                                    <img src="{{ post.image.url }}">
-                                </figure>
-                            {% endif %}
-                                
-
-                            <h2 class="subtitle is-4">{{ post.created_at }}</h2>
-                            <h1 class="title">{{ post.title }}</h1>
-                            <p>{{ post.intro }}</p>
-                        </a>
-                        </div>
-                   
-                     {% endfor %}
-                    </div>
-                </div>
-            </section>
+            {% endfor %}
+          </div>
         </div>
+      </section>
     </div>
+  </div>
 </section>
 
 {% endblock %}
